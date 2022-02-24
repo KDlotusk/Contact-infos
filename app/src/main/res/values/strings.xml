@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">springProject</string>
     <string name="adduser">addUser</string>
+    <string name="validate">validate</string>
+    <string name="your_addresse">Your addresse</string>
+    <string name="your_birthdate">Your birthdate</string>
+    <string name="your_email_addresse">Your email addresse</string>
+    <string name="your_genre">Your Genre</string>
+    <string name="your_phone_number">Your phone number</string>
+    <string name="your_last_name">Your last name</string>
+    <string name="your_first_name">Your first name</string>
+    <string name="profil_picture">profil picture</string>
 </resources>
