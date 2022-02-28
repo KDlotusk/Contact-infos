@@ -3,6 +3,7 @@ package fr.iutlyon1.theo.springproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ListView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -25,6 +26,8 @@ class UserList : AppCompatActivity() {
     lateinit var listView : ListView
     lateinit var addBtn : FloatingActionButton
 
+    val adapter = UserAdapter(this, listUsers)
+
 
     private fun initializeElements() {
 
@@ -40,8 +43,6 @@ class UserList : AppCompatActivity() {
         initializeElements()
         fillUserList()
 
-
-        val adapter = UserAdapter(this, listUsers)
 
         listView.adapter = adapter
 
@@ -67,10 +68,44 @@ class UserList : AppCompatActivity() {
 
     //TODO remove function and search in the contact information file for that
     private fun fillUserList() {
-        for(i in 0 until 20) {
+        for(i in 0 until 5) {
             listUsers.add(User())
         }
 
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == Constants.RESULT_CODE_FORM_USER) {
+            if(resultCode == RESULT_OK) {
+                Log.e("Activity results", "OK")
+                if(data != null){
+                    if(data.hasExtra(Constants.USER_NAME) && data.hasExtra(Constants.USER_LAST_NAME) && data.hasExtra(Constants.USER_PHONE) && data.hasExtra(Constants.USER_GENRE) && data.hasExtra(Constants.USER_EMAIL) && data.hasExtra(Constants.USER_BIRTHDATE) && data.hasExtra(Constants.USER_ADDRESSE)) {
+
+                        Log.e("Activity results", data.hasExtra(Constants.USER_NAME).toString())
+                        Log.e("Activity results", data.getStringExtra(Constants.USER_NAME)!!)
+
+                        val user = User(
+                            data.getStringExtra(Constants.USER_NAME)!!,
+                            data.getStringExtra(Constants.USER_LAST_NAME)!!,
+                            data.getStringExtra(Constants.USER_GENRE)!!,
+                            data.getStringExtra(Constants.USER_BIRTHDATE)!!,
+                            data.getStringExtra(Constants.USER_PHONE)!!,
+                            data.getStringExtra(Constants.USER_EMAIL)!!,
+                            data.getStringExtra(Constants.USER_ADDRESSE)!!
+                        )
+
+                        listUsers.add(user)
+                        adapter.notifyDataSetChanged()
+
+                    }
+                }
+            }
+            else
+                Log.e("Activity results", "an error occurred")
+        }
     }
 
 
