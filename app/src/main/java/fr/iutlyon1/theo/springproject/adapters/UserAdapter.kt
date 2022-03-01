@@ -56,7 +56,7 @@ class UserAdapter(
         else
             viewHolder.imageView.setImageResource(resID) // TODO (R.drawable.im_default)
 
-        viewHolder.name.text = listUser[position].userName + " " + listUser[position].userLastName
+        viewHolder.name.text = "${listUser[position].userName} ${listUser[position].userLastName}"
         viewHolder.phoneNumber.text = listUser[position].phoneNumber
 
 
